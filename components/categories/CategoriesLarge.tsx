@@ -68,22 +68,28 @@ function CategoriesLarge({ categoryName }: { categoryName: string }) {
         ({ image, description, name, id }, index) => (
           <div
             key={id}
-            className="flex flex-col items-center justify-between gap-8 md:gap-[52] lg:flex-row lg:gap-[125px]"
+            className="flex flex-col items-stretch justify-between gap-8 md:flex-row md:gap-[52] lg:gap-[125px]"
           >
             <div
               className={cn(
-                "bg-secondary rounded-xl p-10 pb-18 lg:p-16 lg:pb-24",
+                "bg-secondary shrink-0 basis-[40%] rounded-xl p-18",
                 isMd && (index % 2 === 0 ? "order-1" : "order-2")
               )}
             >
-              {/* todo: after shadow */}
+              {/* todo: after shadow*/}
               {/* backdrop-filter: blur(43.49250793457031px) */}
-              <Image src={`${image}.png`} alt={name} width={350} height={390} />
+              <Image
+                className="m-auto"
+                src={`${image}.png`}
+                alt={name}
+                width={350}
+                height={390}
+              />
             </div>
 
             <div
               className={cn(
-                "space-y-10 text-center lg:text-left",
+                "basis-[60%] space-y-10 self-center text-center md:text-left",
                 isMd && (index % 2 === 0 ? "order-2" : "order-1")
               )}
             >

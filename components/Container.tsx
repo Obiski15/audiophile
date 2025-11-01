@@ -10,7 +10,7 @@ function Container({
   className?: string
 }) {
   return (
-    <div className={cn("px-6 sm:px-10 lg:px-40", className)}>{children}</div>
+    <div className={cn("px-6 md:px-10 lg:px-20", className)}>{children}</div>
   )
 }
 

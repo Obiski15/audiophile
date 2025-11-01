@@ -1,5 +1,6 @@
-import { Minus, Plus, ShoppingCart } from "lucide-react"
+import { ShoppingCart } from "lucide-react"
 
+import IncDecButton from "../cart/IncDecButton"
 import { Button } from "../ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 
@@ -33,11 +34,7 @@ function Cart() {
                     <p className="text-sm opacity-50">$333</p>
                   </div>
 
-                  <div className="bg-secondary flex items-center justify-between gap-3 p-1.5 opacity-25">
-                    <Plus size={16} />
-                    <p className="text-[13px] font-bold tracking-[1px]">1</p>
-                    <Minus size={16} />
-                  </div>
+                  <IncDecButton />
                 </div>
               </div>
             </div>
