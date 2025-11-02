@@ -31,12 +31,10 @@ function CategoriesLarge({ categoryName }: { categoryName: string }) {
         >
           <div
             className={cn(
-              "bg-secondary shrink-0 basis-[40%] rounded-xl p-18",
+              "bg-secondary after:bg-foreground relative shrink-0 basis-[40%] rounded-xl p-18 after:absolute after:inset-0 after:top-[85%] after:mx-auto after:inline-block after:h-[18px] after:w-[122px] after:blur-xl",
               isMd && (index % 2 === 0 ? "order-1" : "order-2")
             )}
           >
-            {/* todo: after shadow*/}
-            {/* backdrop-filter: blur(43.49250793457031px) */}
             <Image
               className="m-auto"
               src={image}

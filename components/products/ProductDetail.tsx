@@ -24,9 +24,7 @@ function ProductDetail({ productId }: { productId: string }) {
   return (
     <div className="space-y-[120px] lg:space-y-40">
       <div className="flex flex-col items-stretch justify-between gap-8 md:flex-row md:gap-[52] lg:gap-[125px]">
-        <div className="bg-secondary shrink-0 basis-[40%] rounded-xl p-18">
-          {/* todo: after shadow */}
-          {/* backdrop-filter: blur(43.49250793457031px) */}
+        <div className="bg-secondary after:bg-foreground relative shrink-0 basis-[40%] rounded-xl p-18 after:absolute after:inset-0 after:top-[85%] after:mx-auto after:inline-block after:h-[18px] after:w-[122px] after:blur-xl">
           <Image
             className="m-auto"
             src={product.image}

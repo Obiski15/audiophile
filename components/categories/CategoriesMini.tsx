@@ -25,11 +25,8 @@ function CategoriesMini() {
     <div className="grid grid-cols-1 grid-rows-3 gap-[30px] md:grid-cols-3 md:grid-rows-1">
       {categories.map(({ path, image, name }, index) => (
         <div className="relative h-full text-center" key={index}>
-          {/* todo: after shadow */}
-          {/* backdrop-filter: blur(43.49250793457031px) */}
-
           <div className="bg-secondary relative mt-20 flex flex-col items-center justify-center gap-3.5 rounded-xl pt-[120px] pb-[30px]">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="after:bg-foreground absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 after:inset-0 after:inline-block after:h-[18px] after:w-[122px] after:blur-xl">
               <Image
                 src={`${image}.png`}
                 className="mx-auto"
