@@ -1,4 +1,10 @@
+"use client"
+
 import Image from "next/image"
+import { useQuery } from "convex/react"
+
+import { api } from "@/convex/_generated/api"
+import { Id } from "@/convex/_generated/dataModel"
 
 import { formatCurrency } from "../../lib/utils"
 import IncDecButton from "../cart/IncDecButton"
@@ -6,7 +12,11 @@ import { Button } from "../ui/button"
 import Likes from "./Likes"
 
 function ProductDetail({ productId }: { productId: string }) {
-  console.log(productId)
+  const product = useQuery(api.products.getProduct, {
+    id: productId as Id<"products">,
+  })
+
+  if (!product) return <div>loading</div>
 
   return (
     <div className="space-y-[120px] lg:space-y-40">
@@ -16,7 +26,7 @@ function ProductDetail({ productId }: { productId: string }) {
           {/* backdrop-filter: blur(43.49250793457031px) */}
           <Image
             className="m-auto"
-            src="/images/categories/earphone.png"
+            src={product.image}
             alt="name"
             width={350}
             height={390}
@@ -25,29 +35,28 @@ function ProductDetail({ productId }: { productId: string }) {
 
         <div className="basis-[60%] space-y-10 self-center">
           <div className="space-y-6">
-            <p className="text-sm font-normal tracking-[10px] text-[#D87D4A] uppercase">
-              new product
-            </p>
+            {product.new && (
+              <p className="text-sm font-normal tracking-[10px] text-[#D87D4A] uppercase">
+                new product
+              </p>
+            )}
 
             <h1 className="text-4xl leading-10 font-bold tracking-[2px] uppercase sm:text-[40px] sm:leading-11">
-              YX1 WIRELESS EARPHONES
+              {product.name}
             </h1>
             <p className="text-[15px] leading-6 font-medium tracking-normal opacity-75">
-              Tailor your listening experience with bespoke dynamic drivers from
-              the new YX1 Wireless Earphones. Enjoy incredible high-fidelity
-              sound even in noisy environments with its active noise
-              cancellation feature.
+              {product.description}
             </p>
           </div>
 
           <h3 className="text-lg font-bold tracking-[1.29px]">
-            {formatCurrency(222)}
+            {formatCurrency(product.price)}
           </h3>
 
           <div className="flex w-fit items-center justify-start gap-4">
             <IncDecButton />
             <Button className="text-[13px] font-bold tracking-[1px] uppercase">
-              see product
+              add to cart
             </Button>
           </div>
         </div>
@@ -60,21 +69,10 @@ function ProductDetail({ productId }: { productId: string }) {
             features
           </h2>
           <p className="text-[15px] leading-[25px] font-normal opacity-25">
-            Featuring a genuine leather head strap and premium earcups, these
-            headphones deliver superior comfort for those who like to enjoy
-            endless listening. It includes intuitive controls designed for any
-            situation. Whether you&apos;re taking a business call or just in
-            your own personal space, the auto on/off and pause features ensure
-            that you&apos;ll never miss a beat.
+            {product.features[0]}
             <br />
             <br />
-            The advanced Active Noise Cancellation with built-in equalizer allow
-            you to experience your audio world on your terms. It lets you enjoy
-            your audio in peace, but quickly interact with your surroundings
-            when you need to. Combined with Bluetooth 5. 0 compliant
-            connectivity and 17 hour battery life, the XX99 Mark II headphones
-            gives you superior sound, cutting-edge technology, and a modern
-            design aesthetic.
+            {product.features[1]}
           </p>
         </div>
 
@@ -84,30 +82,15 @@ function ProductDetail({ productId }: { productId: string }) {
             in the box
           </h2>
           <ul className="space-y-2">
-            <li className="flex items-center justify-start gap-6 text-[15px] leading-[25px]">
-              <span className="text-primary font-bold">1x</span>
-              <span className="font-normal opacity-50">Headphone Unit</span>
-            </li>
-            <li className="flex items-center justify-start gap-6 text-[15px] leading-[25px]">
-              <span className="text-primary font-bold">2x</span>
-              <span className="font-normal opacity-50">
-                Replacement Earcups
-              </span>
-            </li>
-            <li className="flex items-center justify-start gap-6 text-[15px] leading-[25px]">
-              <span className="text-primary font-bold">1x</span>
-              <span className="font-normal opacity-50">User Manual</span>
-            </li>
-            <li className="flex items-center justify-start gap-6 text-[15px] leading-[25px]">
-              <span className="text-primary font-bold">1x</span>
-              <span className="font-normal opacity-50">
-                3.5mm 5m Audio Cable
-              </span>
-            </li>
-            <li className="flex items-center justify-start gap-6 text-[15px] leading-[25px]">
-              <span className="text-primary font-bold">1x</span>
-              <span className="font-normal opacity-50">Travel Bag</span>
-            </li>
+            {product.includes.map(({ quantity, item }) => (
+              <li
+                key={item}
+                className="flex items-center justify-start gap-6 text-[15px] leading-[25px]"
+              >
+                <span className="text-primary font-bold">{quantity}x</span>
+                <span className="font-normal opacity-50">{item}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -116,33 +99,33 @@ function ProductDetail({ productId }: { productId: string }) {
       <div className="grid grid-cols-1 grid-rows-4 gap-5 md:grid-cols-2 md:grid-rows-2 lg:gap-[30px]">
         <div className="relative aspect-video h-full">
           <Image
-            src="/images/earphones/earphone-1.png"
-            alt="earphone 1"
-            className="h-full w-full object-cover"
+            src={product.images[0]}
+            alt={product.name}
+            className="h-full w-full rounded-xl object-cover"
             fill
           />
         </div>
 
         <div className="relative order-3 row-span-2 flex h-full items-center justify-center md:order-2">
           <Image
-            src="/images/earphones/earphone-2.png"
-            alt="earphone 2"
-            className="h-full w-full object-cover"
+            src={product.images[1]}
+            alt={product.name}
+            className="h-full w-full rounded-xl object-cover"
             fill
           />
         </div>
 
         <div className="relative order-2 flex aspect-video h-full items-center justify-center md:order-3">
           <Image
-            src="/images/earphones/earphone-3.png"
-            alt="earphone 3"
-            className="h-full w-full object-cover"
+            src={product.images[2]}
+            alt={product.name}
+            className="h-full w-full rounded-xl object-cover"
             fill
           />
         </div>
       </div>
 
-      <Likes />
+      <Likes productId={product._id} />
     </div>
   )
 }
