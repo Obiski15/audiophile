@@ -13,9 +13,9 @@ function IncDecButton({ productId }: { productId: string }) {
         onClick={() => {
           removeFromCart(productId)
         }}
-        className="cursor-pointer"
+        className="hover:text-primary cursor-pointer opacity-25 hover:opacity-100"
       >
-        <Minus size={16} className="opacity-25" />
+        <Minus size={16} />
       </button>
 
       <p className="text-[13px] font-bold tracking-[1px]">
@@ -26,9 +26,9 @@ function IncDecButton({ productId }: { productId: string }) {
         onClick={() => {
           incQuantity(productId)
         }}
-        className="cursor-pointer"
+        className="hover:text-primary cursor-pointer opacity-25 hover:opacity-100"
       >
-        <Plus size={16} className="opacity-25" />
+        <Plus size={16} />
       </button>
     </div>
   )

@@ -35,7 +35,7 @@ function Cart() {
 
               <button
                 onClick={clearCart}
-                className="cursor-pointer text-[15px] leading-[25px] font-normal opacity-50 hover:underline"
+                className="hover:text-primary cursor-pointer text-[15px] leading-[25px] font-normal opacity-50 hover:opacity-100"
               >
                 Remove all
               </button>

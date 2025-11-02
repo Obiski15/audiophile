@@ -11,17 +11,17 @@ const icons = [
   {
     name: "facebook",
     path: "/icons/facebook",
-    url: "#",
+    url: "https://www.facebook.com/obiskicancode/",
   },
   {
     name: "twitter",
     path: "/icons/twitter",
-    url: "#",
+    url: "https://x.com/_obiski",
   },
   {
     name: "instagram",
     path: "/icons/instagram",
-    url: "#",
+    url: "https://www.instagram.com/obiskicancode/",
   },
 ]
 
@@ -61,9 +61,9 @@ export default function Footer() {
 function Socials({ className }: { className?: string }) {
   return (
     <ul className={cn(`flex items-center justify-start gap-4`, className)}>
-      {icons.map(({ path, name }, index) => (
+      {icons.map(({ path, name, url }, index) => (
         <li className="shrink-0" key={index}>
-          <Link href="#">
+          <Link href={url} target="_blank" rel="noreferrer">
             <Image src={`${path}.svg`} alt={name} width={24} height={24} />
           </Link>
         </li>

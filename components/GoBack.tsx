@@ -2,21 +2,18 @@
 
 import { useRouter } from "next/navigation"
 
-import { Button } from "./ui/button"
-
 function GoBack() {
   const router = useRouter()
 
   return (
-    <Button
+    <button
       onClick={() => {
         router.back()
       }}
-      variant="link"
-      className="text-foreground cursor-pointer p-0 text-[15px] leading-[25px] opacity-50"
+      className="text-foreground/50 hover:text-primary cursor-pointer p-0 text-[15px] leading-[25px] font-semibold"
     >
       Go Back
-    </Button>
+    </button>
   )
 }
 

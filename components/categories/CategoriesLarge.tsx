@@ -1,20 +1,18 @@
 "use client"
 
 import Image from "next/image"
-import { useRouter } from "next/navigation"
 import { useQuery } from "convex/react"
 
 import { cn } from "@/lib/utils"
 import { useIsMd } from "@/hooks/useMediaQuery"
 
 import { api } from "../../convex/_generated/api"
-import { Button } from "../ui/button"
+import SeeProduct from "../SeeProduct"
 
 function CategoriesLarge({ categoryName }: { categoryName: string }) {
   const products = useQuery(api.products.getCategoryProducts, {
     category: categoryName,
   })
-  const router = useRouter()
 
   const isMd = useIsMd()
 
@@ -63,14 +61,10 @@ function CategoriesLarge({ categoryName }: { categoryName: string }) {
                 {description}
               </p>
             </div>
-            <Button
-              onClick={() => {
-                router.push(`/products/${_id}`)
-              }}
+            <SeeProduct
+              productId={_id}
               className="text-[13px] font-bold tracking-[1px] uppercase"
-            >
-              see product
-            </Button>
+            />
           </div>
         </div>
       ))}

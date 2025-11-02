@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 import Container from "../Container"
-import { Button } from "../ui/button"
+import SeeProduct from "../SeeProduct"
 
 function Hero() {
   return (
@@ -21,9 +21,10 @@ function Hero() {
                 made for the passionate music enthusiast.
               </p>
             </div>
-            <Button className="text-[13px] font-bold tracking-[1px] uppercase">
-              see product
-            </Button>
+            <SeeProduct
+              className="text-[13px] font-bold tracking-[1px] uppercase"
+              productId="j578bbcz2bptx1cqjm51sde59h7tnwz5"
+            />
           </div>
           <div className="overflow-hidden max-sm:py-10">
             <Image
