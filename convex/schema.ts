@@ -6,16 +6,18 @@ export default defineSchema({
     billing: v.object({
       name: v.string(),
       email: v.string(),
+      phone: v.string(),
     }),
     shipping: v.object({
       address: v.string(),
       city: v.string(),
-      postalCode: v.string(),
+      zipCode: v.string(),
       country: v.string(),
     }),
     payment: v.object({
       method: v.string(),
     }),
+    items: v.array(v.string()),
   }),
 
   products: defineTable({

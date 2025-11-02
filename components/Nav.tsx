@@ -9,15 +9,15 @@ const links = [
   },
   {
     name: "headphones",
-    path: "#",
+    path: "/category/headphones",
   },
   {
     name: "speakers",
-    path: "#",
+    path: "/category/speakers",
   },
   {
     name: "earphones",
-    path: "#",
+    path: "/category/earphones",
   },
 ]
 

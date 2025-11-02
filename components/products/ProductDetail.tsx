@@ -6,6 +6,8 @@ import { useQuery } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
 
+import { useCart } from "@/hooks/useCart"
+
 import { formatCurrency } from "../../lib/utils"
 import IncDecButton from "../cart/IncDecButton"
 import { Button } from "../ui/button"
@@ -15,6 +17,7 @@ function ProductDetail({ productId }: { productId: string }) {
   const product = useQuery(api.products.getProduct, {
     id: productId as Id<"products">,
   })
+  const { addToCart, cartItems } = useCart()
 
   if (!product) return <div>loading</div>
 
@@ -54,8 +57,20 @@ function ProductDetail({ productId }: { productId: string }) {
           </h3>
 
           <div className="flex w-fit items-center justify-start gap-4">
-            <IncDecButton />
-            <Button className="text-[13px] font-bold tracking-[1px] uppercase">
+            {cartItems.find(item => item._id === product._id) && (
+              <IncDecButton productId={product._id} />
+            )}
+            <Button
+              onClick={() => {
+                addToCart({
+                  _id: product._id,
+                  name: product.name,
+                  image: product.image,
+                  price: product.price,
+                })
+              }}
+              className="text-[13px] font-bold tracking-[1px] uppercase"
+            >
               add to cart
             </Button>
           </div>

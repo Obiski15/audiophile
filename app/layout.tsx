@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google"
 
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
+import CartProvider from "@/providers/CartProvider"
 import { ConvexClientProvider } from "@/providers/ConvexClientProvider"
 
 import "./globals.css"
@@ -26,9 +27,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${manrope.variable} no_scrollbar antialiased`}>
         <ConvexClientProvider>
-          <Header />
-          {children}
-          <Footer />
+          <CartProvider>
+            <Header />
+            {children}
+            <Footer />
+          </CartProvider>
         </ConvexClientProvider>
       </body>
     </html>

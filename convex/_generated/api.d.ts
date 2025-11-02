@@ -14,7 +14,7 @@ import type {
   FunctionReference,
 } from "convex/server"
 
-import type * as categories from "../categories.js"
+import type * as actions from "../actions.js"
 import type * as orders from "../orders.js"
 import type * as products from "../products.js"
 
@@ -27,7 +27,7 @@ import type * as products from "../products.js"
  * ```
  */
 declare const fullApi: ApiFromModules<{
-  categories: typeof categories
+  actions: typeof actions
   orders: typeof orders
   products: typeof products
 }>

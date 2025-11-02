@@ -17,6 +17,8 @@
     "^@/app/(.*)$",
     "^@/components/(.*)$",
     "^@/providers/(.*)$",
+    "",
+    "^@/templates/(.*)$",
     "^@/schema/(.*)$",
     "^@/types/(.*)$",
     "^@/convex/(.*)$",
