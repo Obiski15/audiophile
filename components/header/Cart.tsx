@@ -10,7 +10,7 @@ function Cart() {
       <PopoverTrigger className="cursor-pointer">
         <ShoppingCart />
       </PopoverTrigger>
-      <PopoverContent className="mt-10 mr-10 p-6">
+      <PopoverContent className="mt-10 mr-10 border-none p-6">
         <div className="space-y-6">
           <div className="space-y-8">
             <div className="flex items-center justify-between">

@@ -1,14 +1,25 @@
 import BestAudio from "@/components/BestAudio"
 import CategoriesMini from "@/components/categories/CategoriesMini"
 import Container from "@/components/Container"
+import GoBack from "@/components/GoBack"
 import ProductDetail from "@/components/products/ProductDetail"
 
-function ProductDetailsPage() {
+interface Props {
+  params: Promise<{ productId: string }>
+}
+
+async function ProductDetailsPage({ params }: Props) {
+  const { productId } = await params
+
   return (
     <div>
-      <Container className="mt-16 space-y-[120px] md:pt-[120px] lg:space-y-40 lg:pt-40">
-        <ProductDetail />
-        <CategoriesMini />
+      <Container className="pt:4 space-y-6 md:pt-8 lg:space-y-14 lg:pt-20">
+        <GoBack />
+
+        <div className="space-y-[120px] lg:space-y-40">
+          <ProductDetail productId={productId} />
+          <CategoriesMini />
+        </div>
       </Container>
 
       <BestAudio />

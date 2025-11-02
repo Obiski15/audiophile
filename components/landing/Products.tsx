@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 import CategoriesMini from "../categories/CategoriesMini"
 import Container from "../Container"
 import { Button } from "../ui/button"
@@ -9,19 +11,51 @@ function Products() {
         <CategoriesMini />
 
         <div className="space-y-12">
-          {/* todo: add product cards */}
-          <div className="bg-primary flex items-center justify-between">
-            <div>image</div>
-            <div>text</div>
+          <div className="bg-primary text-background flex items-center justify-center gap-[125px] overflow-hidden bg-[url('/icons/oval.svg')] bg-cover bg-left bg-no-repeat px-24 pt-24">
+            <div className="border-2">
+              <Image
+                src="/images/zx9-speaker.png"
+                alt="ZX9 Speaker"
+                width={410}
+                height={493}
+              />
+            </div>
+
+            <div className="space-y-10">
+              <div className="space-y-6">
+                <p className="text-sm font-normal tracking-[10px] text-[#D87D4A] uppercase">
+                  new product
+                </p>
+
+                <h1 className="text-4xl leading-10 font-bold tracking-[2px] uppercase sm:text-[40px] sm:leading-11">
+                  YX1 WIRELESS EARPHONES
+                </h1>
+                <p className="text-[15px] leading-6 font-medium tracking-normal opacity-75">
+                  Tailor your listening experience with bespoke dynamic drivers
+                  from the new YX1 Wireless Earphones. Enjoy incredible
+                  high-fidelity sound even in noisy environments with its active
+                  noise cancellation feature.
+                </p>
+              </div>
+
+              <Button
+                variant="secondary"
+                className="text-[13px] font-bold tracking-[1px] uppercase"
+              >
+                see product
+              </Button>
+            </div>
           </div>
 
-          <div className="rotate-180 border-2 border-red-500 bg-[url('/images/zx7-speaker.png')] bg-cover bg-right bg-no-repeat before:inset-0 before:translate-x-[1000px] before:-translate-y-[100px]">
+          <div className="bg-[url('/images/zx7-speaker.png')] bg-cover bg-center bg-no-repeat">
             <div className="h-full rounded-xl py-[100px] pl-[95px]">
               <div className="space-y-8 uppercase">
-                <h3 className="text-[28px] font-bold tracking-[2px]">
+                <h3 className="text-[28px] font-bold tracking-[2px] uppercase">
                   yx1 earphone
                 </h3>
-                <Button variant="outline">see product</Button>
+                <Button variant="outline" className="bg-transparent">
+                  see product
+                </Button>
               </div>
             </div>
           </div>

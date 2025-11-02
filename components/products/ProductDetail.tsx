@@ -5,7 +5,9 @@ import IncDecButton from "../cart/IncDecButton"
 import { Button } from "../ui/button"
 import Likes from "./Likes"
 
-function ProductDetail() {
+function ProductDetail({ productId }: { productId: string }) {
+  console.log(productId)
+
   return (
     <div className="space-y-[120px] lg:space-y-40">
       <div className="flex flex-col items-stretch justify-between gap-8 md:flex-row md:gap-[52] lg:gap-[125px]">
