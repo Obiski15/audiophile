@@ -40,7 +40,7 @@ function Products() {
               <SeeProduct
                 variant="secondary"
                 className="text-[13px] font-bold tracking-[1px] uppercase"
-                productId="j5736x0t4f5n0v0q0cyb55mz497tn8ma"
+                productId={process.env.NEXT_PUBLIC_ZX9_SPEAKER!}
               />
             </div>
           </div>
@@ -52,7 +52,7 @@ function Products() {
                   ZX7 SPEAKER
                 </h3>
                 <SeeProduct
-                  productId="j57380ws0p3by5jwgvwth09vyn7tmf48"
+                  productId={process.env.NEXT_PUBLIC_ZX7_SPEAKER!}
                   variant="outline"
                   className="bg-transparent"
                 />
@@ -70,7 +70,7 @@ function Products() {
                 </h3>
 
                 <SeeProduct
-                  productId="j572nb6kqy3ya76w1w2516fds97tmnrv"
+                  productId={process.env.NEXT_PUBLIC_YX1_EARPHONE!}
                   variant="outline"
                 >
                   see product

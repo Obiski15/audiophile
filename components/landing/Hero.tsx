@@ -23,7 +23,7 @@ function Hero() {
             </div>
             <SeeProduct
               className="text-[13px] font-bold tracking-[1px] uppercase"
-              productId="j578bbcz2bptx1cqjm51sde59h7tnwz5"
+              productId={process.env.NEXT_PUBLIC_XX99_Mark_II!}
             />
           </div>
           <div className="overflow-hidden max-sm:py-10">

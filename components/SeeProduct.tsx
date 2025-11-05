@@ -8,18 +8,15 @@ import { cn } from "@/lib/utils"
 
 import { Button, buttonVariants } from "./ui/button"
 
-function SeeProduct({
-  children,
-  className,
-  productId,
-  variant,
-}: {
+type Props = {
   children?: ReactNode
   className?: string
   productId: string
   variant?: VariantProps<typeof buttonVariants>["variant"]
   size?: VariantProps<typeof buttonVariants>["size"]
-}) {
+}
+
+function SeeProduct({ children, className, productId, variant }: Props) {
   const router = useRouter()
 
   return (

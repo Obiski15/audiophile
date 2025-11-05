@@ -34,7 +34,6 @@ export function useMediaQuery(query: string): boolean {
   return matches
 }
 
-// Predefined breakpoint hooks for convenience
 export function useIsMobile(): boolean {
   return useMediaQuery("(max-width: 767px)")
 }
