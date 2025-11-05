@@ -13,6 +13,7 @@ import { formatCurrency } from "../../lib/utils"
 import IncDecButton from "../cart/IncDecButton"
 import { Button } from "../ui/button"
 import Likes from "./Likes"
+import LoadingProduct from "./LoadingProduct"
 
 function ProductDetail({ productId }: { productId: string }) {
   const product = useQuery(api.products.getProduct, {
@@ -20,7 +21,7 @@ function ProductDetail({ productId }: { productId: string }) {
   })
   const { addToCart, cartItems } = useCart()
 
-  if (!product) return <div>loading</div>
+  if (!product) return <LoadingProduct />
 
   return (
     <div className="space-y-[120px] lg:space-y-40">

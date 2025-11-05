@@ -9,6 +9,8 @@ import { useIsMd } from "@/hooks/useMediaQuery"
 
 import { api } from "../../convex/_generated/api"
 import SeeProduct from "../SeeProduct"
+import CategoryProductNotFound from "./CategoryProductNotFound"
+import LoadingCategoryProducts from "./LoadingCategoryProducts"
 
 function CategoriesLarge({ categoryName }: { categoryName: string }) {
   const products = useQuery(api.products.getCategoryProducts, {
@@ -17,9 +19,10 @@ function CategoriesLarge({ categoryName }: { categoryName: string }) {
 
   const isMd = useIsMd()
 
-  if (!products) return "Loading..."
+  if (!products) return <LoadingCategoryProducts />
 
-  if (!products.length) return <div>Category not found</div>
+  if (!products.length)
+    return <CategoryProductNotFound categoryName={categoryName} />
 
   return (
     <div className="space-y-[120px] lg:space-y-40">
