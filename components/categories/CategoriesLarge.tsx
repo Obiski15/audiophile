@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useQuery } from "convex/react"
+import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 import { useIsMd } from "@/hooks/useMediaQuery"
@@ -23,11 +24,19 @@ function CategoriesLarge({ categoryName }: { categoryName: string }) {
   return (
     <div className="space-y-[120px] lg:space-y-40">
       {products.map(({ description, new: isNew, _id, image, name }, index) => (
-        <div
+        <motion.div
           key={_id}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, delay: index * 0.1 }}
           className="flex flex-col items-stretch justify-between gap-8 md:flex-row md:gap-[52] lg:gap-[125px]"
         >
-          <div
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
             className={cn(
               "bg-secondary after:bg-foreground relative shrink-0 basis-[40%] rounded-xl p-18 after:absolute after:inset-0 after:top-[85%] after:mx-auto after:inline-block after:h-[18px] after:w-[122px] after:blur-xl",
               isMd && (index % 2 === 0 ? "order-1" : "order-2")
@@ -40,9 +49,13 @@ function CategoriesLarge({ categoryName }: { categoryName: string }) {
               width={350}
               height={390}
             />
-          </div>
+          </motion.div>
 
-          <div
+          <motion.div
+            initial={{ opacity: 0, x: index % 2 === 0 ? 30 : -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
             className={cn(
               "basis-[60%] space-y-10 self-center text-center md:text-left",
               isMd && (index % 2 === 0 ? "order-2" : "order-1")
@@ -65,8 +78,8 @@ function CategoriesLarge({ categoryName }: { categoryName: string }) {
               productId={_id}
               className="text-[13px] font-bold tracking-[1px] uppercase"
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       ))}
     </div>
   )

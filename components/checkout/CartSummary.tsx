@@ -5,6 +5,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { render } from "@react-email/components"
 import { useAction, useMutation } from "convex/react"
+import { AnimatePresence, motion } from "framer-motion"
 
 import OrderConfirmationEmail from "@/templates/OrderConfirmationEmail"
 import { OrderInput } from "@/schema/order.schema"
@@ -67,7 +68,6 @@ function CartSummary() {
             shippingFee={SHIPPING_COST}
             total={GRAND_TOTAL}
             estimatedDelivery={new Date(
-              // make delivery date 7 days from now
               new Date().setDate(new Date().getDate() + 7)
             ).toLocaleDateString()}
             orderUrl={"/"}
@@ -81,7 +81,6 @@ function CartSummary() {
           from: "Audiophile <noreply@autophile.com>",
         })
 
-        // display order confirmation
         dialogTriggerRef.current?.click()
       } catch (error) {
         window.alert(
@@ -95,48 +94,69 @@ function CartSummary() {
   }
 
   return (
-    <div className="bg-background py:8 w-full space-y-8 rounded-xl px-6 py-8 uppercase md:p-8 lg:basis-[40%]">
+    <motion.div
+      initial={{ opacity: 0, x: 30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, delay: 0.4 }}
+      className="bg-background py:8 w-full space-y-8 rounded-xl px-6 py-8 uppercase md:p-8 lg:basis-[40%]"
+    >
       <h3 className="text-lg font-bold tracking-[1.29px]">summary</h3>
 
       {cartItems.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
         <>
-          <div className="space-y-6">
-            {cartItems.map(item => (
-              <div
-                key={item._id}
-                className="flex items-center justify-start gap-4"
-              >
-                <div className="bg-secondary aspect-square rounded-xl p-3">
-                  <Image
-                    width={36}
-                    height={40}
-                    src={item.image}
-                    alt={item.name}
-                    className="object-cover"
-                  />
-                </div>
-
-                <div className="flex flex-1 items-center justify-between">
-                  <div>
-                    <p className="text-[15px] leading-[25px] font-bold">
-                      {item.name}
-                    </p>
-                    <p className="text-sm leading-[25px] font-bold opacity-50">
-                      {formatCurrency(item.price)}
-                    </p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="space-y-6"
+          >
+            <AnimatePresence mode="popLayout">
+              {cartItems.map((item, index) => (
+                <motion.div
+                  key={item._id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className="flex items-center justify-start gap-4"
+                >
+                  <div className="bg-secondary aspect-square rounded-xl p-3">
+                    <Image
+                      width={36}
+                      height={40}
+                      src={item.image}
+                      alt={item.name}
+                      className="object-cover"
+                    />
                   </div>
 
-                  <p className="text-sm leading-[25px] font-bold opacity-50">
-                    x{item.quantity}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+                  <div className="flex flex-1 items-center justify-between">
+                    <div>
+                      <p className="text-[15px] leading-[25px] font-bold">
+                        {item.name}
+                      </p>
+                      <p className="text-sm leading-[25px] font-bold opacity-50">
+                        {formatCurrency(item.price)}
+                      </p>
+                    </div>
 
-          <div className="space-y-6">
+                    <p className="text-sm leading-[25px] font-bold opacity-50">
+                      x{item.quantity}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
+            className="space-y-6"
+          >
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <p className="text-sm leading-[25px] font-bold opacity-50">
@@ -172,34 +192,52 @@ function CartSummary() {
                 {formatCurrency(GRAND_TOTAL)}
               </p>
             </div>
-          </div>
+          </motion.div>
 
           <AlertDialog>
             <AlertDialogTrigger
               className="hidden"
               ref={dialogTriggerRef}
             ></AlertDialogTrigger>
-            <Button
-              disabled={isPlacingOrder}
-              onClick={handleContinueAndPay}
-              type="button"
-              className="w-full uppercase"
-            >
-              Continue & Pay
-            </Button>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button
+                disabled={isPlacingOrder}
+                onClick={handleContinueAndPay}
+                type="button"
+                className="w-full uppercase"
+              >
+                Continue & Pay
+              </Button>
+            </motion.div>
 
             <AlertDialogContent className="border-none p-12">
               <AlertDialogTitle className="hidden"></AlertDialogTitle>
               <AlertDialogDescription className="hidden"></AlertDialogDescription>
-              <div className="space-y-6 md:space-y-8">
-                <Image
-                  src="/icons/check.svg"
-                  width={64}
-                  height={64}
-                  alt="check"
-                />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+                className="space-y-6 md:space-y-8"
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5, type: "spring" }}
+                >
+                  <Image
+                    src="/icons/check.svg"
+                    width={64}
+                    height={64}
+                    alt="check"
+                  />
+                </motion.div>
 
-                <div className="space-y-4 md:space-y-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="space-y-4 md:space-y-6"
+                >
                   <h2 className="text-2xl leading-7 font-bold tracking-[1.14px] uppercase md:text-[32px] md:leading-9">
                     THANK YOU
                     <br />
@@ -208,9 +246,14 @@ function CartSummary() {
                   <p className="text-[15px] leading-[25px] font-normal opacity-50">
                     You will receive an email confirmation shortly.
                   </p>
-                </div>
+                </motion.div>
 
-                <div className="flex flex-col items-stretch justify-center md:flex-row">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="flex flex-col items-stretch justify-center md:flex-row"
+                >
                   <div className="bg-secondary flex-1 space-y-3 rounded-t-xl p-6 md:rounded-l-xl">
                     <div className="flex items-start justify-start gap-2">
                       <div className="shrink-0 p-2">
@@ -259,7 +302,7 @@ function CartSummary() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 <AlertDialogAction asChild>
                   <Button
@@ -294,12 +337,12 @@ function CartSummary() {
                     Back to Home
                   </Button>
                 </AlertDialogAction>
-              </div>
+              </motion.div>
             </AlertDialogContent>
           </AlertDialog>
         </>
       )}
-    </div>
+    </motion.div>
   )
 }
 

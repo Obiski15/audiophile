@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { motion } from "framer-motion"
 
 import CategoriesMini from "../categories/CategoriesMini"
 import Container from "../Container"
@@ -11,8 +14,20 @@ function Products() {
         <CategoriesMini />
 
         <div className="space-y-12 text-center lg:text-left">
-          <div className="bg-primary text-background flex flex-col items-center justify-center gap-8 overflow-hidden rounded-xl bg-[url('/icons/oval.svg')] bg-cover bg-center bg-no-repeat px-6 pt-[52px] pb-16 lg:flex-row lg:gap-[125px] lg:px-24">
-            <div className="lg:translate-y-[20%]">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="bg-primary text-background flex flex-col items-center justify-center gap-8 overflow-hidden rounded-xl bg-[url('/icons/oval.svg')] bg-cover bg-center bg-no-repeat px-6 pt-[52px] pb-16 lg:flex-row lg:gap-[125px] lg:px-24"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:translate-y-[20%]"
+            >
               <Image
                 className="mx-auto"
                 src="/images/zx9-speaker.png"
@@ -20,9 +35,15 @@ function Products() {
                 width={410}
                 height={493}
               />
-            </div>
+            </motion.div>
 
-            <div className="space-y-10 lg:max-w-[350px]">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="space-y-10 lg:max-w-[350px]"
+            >
               <div className="space-y-6">
                 <p className="text-sm font-normal tracking-[10px] text-[#D87D4A] uppercase">
                   new product
@@ -42,10 +63,16 @@ function Products() {
                 className="text-[13px] font-bold tracking-[1px] uppercase"
                 productId={process.env.NEXT_PUBLIC_ZX9_SPEAKER!}
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div className="bg-[url('/images/zx7-speaker.png')] bg-cover bg-center bg-no-repeat">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="bg-[url('/images/zx7-speaker.png')] bg-cover bg-center bg-no-repeat"
+          >
             <div className="h-full rounded-xl py-24 pl-6 md:pl-14 lg:pl-[95px]">
               <div className="space-y-8 uppercase">
                 <h3 className="text-[28px] font-bold tracking-[2px] uppercase">
@@ -58,12 +85,30 @@ function Products() {
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 grid-rows-2 justify-between gap-5 md:grid-cols-2 md:grid-rows-1">
-            <div className="h-full rounded-xl bg-[url('/images/yx1-earphone.png')] bg-cover bg-center bg-no-repeat"></div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="grid grid-cols-1 grid-rows-2 justify-between gap-5 md:grid-cols-2 md:grid-rows-1"
+          >
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="h-full rounded-xl bg-[url('/images/yx1-earphone.png')] bg-cover bg-center bg-no-repeat"
+            ></motion.div>
 
-            <div className="bg-secondary h-full rounded-xl py-10 sm:pl-6 md:py-[100px] md:pl-10 lg:pl-24">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-secondary h-full rounded-xl py-10 sm:pl-6 md:py-[100px] md:pl-10 lg:pl-24"
+            >
               <div className="space-y-8 uppercase">
                 <h3 className="text-[28px] font-bold tracking-[2px]">
                   yx1 earphone
@@ -76,8 +121,8 @@ function Products() {
                   see product
                 </SeeProduct>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </Container>

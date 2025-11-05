@@ -1,6 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
 
 import { OrderInput, orderSchema } from "@/schema/order.schema"
@@ -21,22 +22,20 @@ function Checkout() {
     resolver: zodResolver(orderSchema),
   })
 
-  // const _onSubmit: SubmitHandler<OrderInput> = values => {
-  //   console.log(values)
-  // }
-
   return (
     <div className="space-y-10">
       <GoBack />
 
       <Form {...form}>
-        <form
-          // onSubmit={form.handleSubmit(_onSubmit)}
+        <motion.form
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="flex flex-col items-start justify-between gap-8 md:gap-[30px] lg:flex-row"
         >
           <CheckoutForm />
           <CartSummary />
-        </form>
+        </motion.form>
       </Form>
     </div>
   )

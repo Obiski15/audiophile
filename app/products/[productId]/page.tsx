@@ -1,3 +1,8 @@
+"use client"
+
+import { use } from "react"
+import { motion } from "framer-motion"
+
 import BestAudio from "@/components/BestAudio"
 import CategoriesMini from "@/components/categories/CategoriesMini"
 import Container from "@/components/Container"
@@ -8,11 +13,15 @@ interface Props {
   params: Promise<{ productId: string }>
 }
 
-async function ProductDetailsPage({ params }: Props) {
-  const { productId } = await params
+export default function ProductDetailsPage({ params }: Props) {
+  const { productId } = use(params)
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <Container className="pt:4 space-y-6 md:pt-8 lg:space-y-14 lg:pt-20">
         <GoBack />
 
@@ -23,8 +32,6 @@ async function ProductDetailsPage({ params }: Props) {
       </Container>
 
       <BestAudio />
-    </div>
+    </motion.div>
   )
 }
-
-export default ProductDetailsPage

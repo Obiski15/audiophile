@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import { Menu } from "lucide-react"
 
 import { useIsDesktop } from "@/hooks/useMediaQuery"
@@ -17,11 +18,21 @@ function Header() {
 
   return (
     <Container className="bg-foreground">
-      <header className="border-b-border/10 text-background flex items-center justify-between border-b py-8">
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="border-b-border/10 text-background relative flex items-center justify-between border-b py-8"
+      >
         <div className="flex flex-1 items-center justify-start sm:gap-10">
-          <button className="lg:hidden" onClick={() => setShowMenu(s => !s)}>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="lg:hidden"
+            onClick={() => setShowMenu(s => !s)}
+          >
             <Menu />
-          </button>
+          </motion.button>
 
           <div className="max-sm:flex max-sm:flex-1 max-sm:items-center max-sm:justify-center">
             <Logo />
@@ -31,15 +42,21 @@ function Header() {
         <Nav className="hidden" />
 
         <Cart />
-      </header>
+      </motion.header>
 
-      <div className="border-t-border/10 border-t">
+      <AnimatePresence>
         {showMenu && !isMobile && (
-          <div className="bg-background rounded-xl px-6 py-8 md:px-10 md:py-12">
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="bg-background absolute left-1/2 z-50 w-full -translate-x-1/2 overflow-hidden rounded-xl px-6 py-8 md:px-10 md:py-12"
+          >
             <CategoriesMini />
-          </div>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </Container>
   )
 }

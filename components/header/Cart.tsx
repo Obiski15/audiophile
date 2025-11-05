@@ -4,6 +4,7 @@ import { useRef } from "react"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { PopoverClose } from "@radix-ui/react-popover"
+import { AnimatePresence, motion } from "framer-motion"
 import { ShoppingCart } from "lucide-react"
 
 import { formatCurrency } from "@/lib/utils"
@@ -21,12 +22,23 @@ function Cart() {
 
   return (
     <Popover>
-      <PopoverTrigger className="cursor-pointer">
-        <ShoppingCart />
+      <PopoverTrigger asChild>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="cursor-pointer"
+        >
+          <ShoppingCart />
+        </motion.button>
       </PopoverTrigger>
       <PopoverClose ref={closePopoverRef}></PopoverClose>
       <PopoverContent className="mt-10 mr-10 border-none p-6">
-        <div className="space-y-6">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.2 }}
+          className="space-y-6"
+        >
           <div className="space-y-8">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold tracking-[1.29px]">
@@ -44,33 +56,42 @@ function Cart() {
             {!cartItems.length ? (
               <p>cart is empty</p>
             ) : (
-              cartItems.map(item => (
-                <div key={item._id} className="space-y-6">
-                  <div className="flex items-center justify-start gap-4">
-                    <div className="bg-secondary flex size-16 shrink-0 items-center justify-center rounded-xl">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        width={40}
-                        height={40}
-                      />
-                    </div>
-
-                    <div className="flex flex-1 items-center justify-between gap-2">
-                      <div className="max-w-20 leading-[25px] font-bold">
-                        <p className="overflow-hidden text-[15px] text-ellipsis whitespace-nowrap uppercase">
-                          {item.name}
-                        </p>
-                        <p className="text-sm opacity-50">
-                          {formatCurrency(item.price)}
-                        </p>
+              <AnimatePresence mode="popLayout">
+                {cartItems.map((item, index) => (
+                  <motion.div
+                    key={item._id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="space-y-6"
+                  >
+                    <div className="flex items-center justify-start gap-4">
+                      <div className="bg-secondary flex size-16 shrink-0 items-center justify-center rounded-xl">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={40}
+                          height={40}
+                        />
                       </div>
 
-                      <IncDecButton productId={item._id} />
+                      <div className="flex flex-1 items-center justify-between gap-2">
+                        <div className="max-w-20 leading-[25px] font-bold">
+                          <p className="overflow-hidden text-[15px] text-ellipsis whitespace-nowrap uppercase">
+                            {item.name}
+                          </p>
+                          <p className="text-sm opacity-50">
+                            {formatCurrency(item.price)}
+                          </p>
+                        </div>
+
+                        <IncDecButton productId={item._id} />
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             )}
             <div className="flex items-center justify-between">
               <h3 className="text-[15px] leading-[25px] font-normal">Total</h3>
@@ -92,7 +113,7 @@ function Cart() {
           >
             Checkout
           </Button>
-        </div>
+        </motion.div>
       </PopoverContent>
     </Popover>
   )

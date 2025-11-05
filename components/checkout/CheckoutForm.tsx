@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion"
 import { useWatch } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
@@ -22,7 +23,12 @@ function CheckoutForm() {
   })
 
   return (
-    <div className="bg-background w-full space-y-10 rounded-xl px-6 py-8 md:px-8 lg:basis-[70%] lg:p-12">
+    <motion.div
+      initial={{ opacity: 0, x: -30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, delay: 0.3 }}
+      className="bg-background w-full space-y-10 rounded-xl px-6 py-8 md:px-8 lg:basis-[70%] lg:p-12"
+    >
       <h2 className="text-[32px] leading-9 font-bold tracking-[1.14px] uppercase">
         Checkout
       </h2>
@@ -256,57 +262,65 @@ function CheckoutForm() {
             )}
           />
 
-          {paymentMethod === "eMoney" && (
-            <div className="flex flex-wrap items-center justify-start gap-x-4 gap-y-6">
-              <FormField
-                control={control}
-                name="payment.eMoneyNumber"
-                render={({ field, fieldState: { error } }) => (
-                  <FormItem className="w-full space-y-2 md:basis-[calc(50%-0.5rem)]">
-                    <div className="flex items-center justify-between gap-1">
-                      <FormLabel
-                        htmlFor="eMoneyNumber"
-                        className="text-[12px] font-bold tracking-[-0.21px]"
-                      >
-                        e-Money Number
-                      </FormLabel>
-                      <FormMessage className="text-[12px] font-bold tracking-[-0.21px]">
-                        {error?.message}
-                      </FormMessage>
-                    </div>
-                    <Input
-                      id="eMoneyNumber"
-                      placeholder="238521993"
-                      {...field}
-                    />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={control}
-                name="payment.eMoneyPin"
-                render={({ field, fieldState: { error } }) => (
-                  <FormItem className="w-full space-y-2 md:basis-[calc(50%-0.5rem)]">
-                    <div className="flex items-center justify-between gap-1">
-                      <FormLabel
-                        htmlFor="eMoneyPin"
-                        className="text-[12px] font-bold tracking-[-0.21px]"
-                      >
-                        e-Money Pin
-                      </FormLabel>
-                      <FormMessage className="text-[12px] font-bold tracking-[-0.21px]">
-                        {error?.message}
-                      </FormMessage>
-                    </div>
-                    <Input id="eMoneyPin" placeholder="6891" {...field} />
-                  </FormItem>
-                )}
-              />
-            </div>
-          )}
+          <AnimatePresence mode="wait">
+            {paymentMethod === "eMoney" && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-wrap items-center justify-start gap-x-4 gap-y-6"
+              >
+                <FormField
+                  control={control}
+                  name="payment.eMoneyNumber"
+                  render={({ field, fieldState: { error } }) => (
+                    <FormItem className="w-full space-y-2 md:basis-[calc(50%-0.5rem)]">
+                      <div className="flex items-center justify-between gap-1">
+                        <FormLabel
+                          htmlFor="eMoneyNumber"
+                          className="text-[12px] font-bold tracking-[-0.21px]"
+                        >
+                          e-Money Number
+                        </FormLabel>
+                        <FormMessage className="text-[12px] font-bold tracking-[-0.21px]">
+                          {error?.message}
+                        </FormMessage>
+                      </div>
+                      <Input
+                        id="eMoneyNumber"
+                        placeholder="238521993"
+                        {...field}
+                      />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={control}
+                  name="payment.eMoneyPin"
+                  render={({ field, fieldState: { error } }) => (
+                    <FormItem className="w-full space-y-2 md:basis-[calc(50%-0.5rem)]">
+                      <div className="flex items-center justify-between gap-1">
+                        <FormLabel
+                          htmlFor="eMoneyPin"
+                          className="text-[12px] font-bold tracking-[-0.21px]"
+                        >
+                          e-Money Pin
+                        </FormLabel>
+                        <FormMessage className="text-[12px] font-bold tracking-[-0.21px]">
+                          {error?.message}
+                        </FormMessage>
+                      </div>
+                      <Input id="eMoneyPin" placeholder="6891" {...field} />
+                    </FormItem>
+                  )}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
