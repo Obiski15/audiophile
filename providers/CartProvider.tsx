@@ -1,6 +1,8 @@
 "use client"
 
-import { createContext, ReactNode, useMemo, useState } from "react"
+import { createContext, ReactNode, useMemo } from "react"
+
+import useLocalStorage from "@/hooks/useLocalStorage"
 
 interface Cart {
   _id: string
@@ -29,7 +31,7 @@ export const CartContext = createContext<Context>({
 })
 
 function CartProvider({ children }: { children: ReactNode }) {
-  const [cartItems, setCartItems] = useState<Cart[]>([])
+  const [cartItems, setCartItems] = useLocalStorage<Cart[]>("cartItems", [])
 
   const totalPrice = useMemo(
     () =>
