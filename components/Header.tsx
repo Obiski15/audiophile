@@ -24,7 +24,7 @@ function Header() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="border-b-border/10 text-background relative flex items-center justify-between border-b py-8"
       >
-        <div className="flex flex-1 items-center justify-start sm:gap-10">
+        <div className="flex items-center justify-start max-sm:flex-1 sm:gap-10">
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -39,7 +39,9 @@ function Header() {
           </div>
         </div>
 
-        <Nav className="hidden" />
+        <div className="max-lg:hidden">
+          <Nav />
+        </div>
 
         <Cart />
       </motion.header>

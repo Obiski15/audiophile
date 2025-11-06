@@ -55,7 +55,10 @@ function CategoriesMini() {
             <h3 className="text-lg font-bold tracking-[1.29px] uppercase">
               {name}
             </h3>
-            <Link href={path} className="flex items-center justify-start gap-1">
+            <Link
+              href={path}
+              className="hover:text-primary flex items-center justify-start gap-1"
+            >
               <span className="text-[13px] font-bold uppercase opacity-50">
                 shop
               </span>

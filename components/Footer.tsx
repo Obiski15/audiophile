@@ -29,7 +29,7 @@ export default function Footer() {
   const date = new Date()
 
   return (
-    <Container className="bg-foreground text-background mt-24 pt-[75px] pb-12">
+    <Container className="bg-foreground before:bg-primary text-background relative mt-24 pt-[75px] pb-12 before:absolute before:top-0 before:h-1 before:w-[100px]">
       <div className="space-y-14 text-center md:text-left">
         <div className="space-y-9">
           <div className="flex flex-col items-center justify-between gap-10 md:flex-row">

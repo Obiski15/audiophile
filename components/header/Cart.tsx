@@ -31,7 +31,7 @@ function Cart() {
           <ShoppingCart />
         </motion.button>
       </PopoverTrigger>
-      <PopoverClose ref={closePopoverRef}></PopoverClose>
+      <PopoverClose ref={closePopoverRef} className="hidden"></PopoverClose>
       <PopoverContent className="mt-10 mr-10 border-none p-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
