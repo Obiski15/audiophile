@@ -47,7 +47,7 @@ function Likes({ productId }: { productId: string }) {
               transition={{ duration: 0.3 }}
               className="bg-secondary flex aspect-square items-center justify-center rounded-xl px-4 py-3 lg:px-16 lg:py-[60px]"
             >
-              <Image alt={name} src={image} width={150} height={195} />
+              <Image alt={name} src={image.url} width={150} height={195} />
             </motion.div>
 
             <div className="flex flex-col items-center justify-center gap-8">

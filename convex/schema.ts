@@ -26,24 +26,18 @@ export default defineSchema({
     description: v.string(),
     price: v.number(),
     new: v.boolean(),
-    image: v.string(),
-    images: v.array(v.string()),
+    image: v.object({ url: v.string(), grayscale: v.boolean() }),
+    images: v.array(
+      v.object({
+        url: v.string(),
+        grayscale: v.boolean(),
+      })
+    ),
     features: v.array(v.string()),
     includes: v.array(
       v.object({
         quantity: v.number(),
         item: v.string(),
-      })
-    ),
-  }),
-
-  categories: defineTable({
-    speakers: v.array(
-      v.object({
-        name: v.string(),
-        image: v.string(),
-        _id: v.string(),
-        description: v.string(),
       })
     ),
   }),

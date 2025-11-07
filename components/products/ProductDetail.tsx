@@ -9,7 +9,7 @@ import { Id } from "@/convex/_generated/dataModel"
 
 import { useCart } from "@/hooks/useCart"
 
-import { formatCurrency } from "../../lib/utils"
+import { cn, formatCurrency } from "../../lib/utils"
 import IncDecButton from "../cart/IncDecButton"
 import { Button } from "../ui/button"
 import Likes from "./Likes"
@@ -23,6 +23,8 @@ function ProductDetail({ productId }: { productId: string }) {
 
   if (!product) return <LoadingProduct />
 
+  console.log(product)
+
   return (
     <div className="space-y-[120px] lg:space-y-40">
       <div className="flex flex-col items-stretch justify-between gap-8 md:flex-row md:gap-[52] lg:gap-[125px]">
@@ -34,7 +36,7 @@ function ProductDetail({ productId }: { productId: string }) {
         >
           <Image
             className="m-auto"
-            src={product.image}
+            src={product.image.url}
             alt="name"
             width={350}
             height={390}
@@ -75,7 +77,7 @@ function ProductDetail({ productId }: { productId: string }) {
                 addToCart({
                   _id: product._id,
                   name: product.name,
-                  image: product.image,
+                  image: product.image.url,
                   price: product.price,
                 })
               }}
@@ -145,9 +147,12 @@ function ProductDetail({ productId }: { productId: string }) {
           className="relative aspect-video h-full"
         >
           <Image
-            src={product.images[0]}
+            src={product.images[0].url}
             alt={product.name}
-            className="h-full w-full rounded-xl object-cover"
+            className={cn(
+              "h-full w-full rounded-xl object-cover",
+              product.images[0].grayscale && "grayscale-100"
+            )}
             fill
           />
         </motion.div>
@@ -160,9 +165,12 @@ function ProductDetail({ productId }: { productId: string }) {
           className="relative order-3 row-span-2 flex h-full items-center justify-center md:order-2"
         >
           <Image
-            src={product.images[1]}
+            src={product.images[1].url}
             alt={product.name}
-            className="h-full w-full rounded-xl object-cover"
+            className={cn(
+              "h-full w-full rounded-xl object-cover",
+              product.images[1].grayscale && "grayscale-100"
+            )}
             fill
           />
         </motion.div>
@@ -175,9 +183,12 @@ function ProductDetail({ productId }: { productId: string }) {
           className="relative order-2 flex aspect-video h-full items-center justify-center md:order-3"
         >
           <Image
-            src={product.images[2]}
+            src={product.images[2].url}
             alt={product.name}
-            className="h-full w-full rounded-xl object-cover"
+            className={cn(
+              "h-full w-full rounded-xl object-cover",
+              product.images[2].grayscale && "grayscale-100"
+            )}
             fill
           />
         </motion.div>

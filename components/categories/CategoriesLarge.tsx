@@ -47,7 +47,7 @@ function CategoriesLarge({ categoryName }: { categoryName: string }) {
           >
             <Image
               className="m-auto"
-              src={image}
+              src={image.url}
               alt={name}
               width={350}
               height={390}
